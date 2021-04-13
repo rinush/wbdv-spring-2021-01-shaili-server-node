@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const quizzesService = require('../services/quizzes/quizzes-service')
+    const quizzesService = require('../services/quizzes-service')
 
     const findAllQuizzes = (req, res) => {
         const quizzes = quizzesService.findAllQuizzes()
@@ -12,5 +12,5 @@ module.exports = (app) => {
     }
 
     app.get('/api/quizzes', findAllQuizzes)
-    app.get('/api/quizzez/:quizId', findQuizById)
+    app.get('/api/quizzes/:qid', findQuizById)
 }
