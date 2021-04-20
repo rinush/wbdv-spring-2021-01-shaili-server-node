@@ -1,12 +1,30 @@
 module.exports = (app) => {
-    const questionService = require("../services/questions-service")
+    const questionsService = require('../services/questions-service')
+
+    const findAllQuestions = (req, res) => {
+        questionsService.findAllQuestions()
+            .then((questions) => {
+                res.send(questions)
+            })
+    }
 
     const findQuestionsForQuiz = (req, res) => {
-        const quizId = req.params['qid']
-        const questions = questionService.findQuestionsForQuiz(quizId)
-        res.json(questions)
+        const quizId = req.params.qzid;
+        questionsService.findQuestionsForQuiz(quizId)
+            .then((questions) => {
+                res.send(questions)
+            })
     }
-    app.get("/api/quizzes/:qid/questions",
-        findQuestionsForQuiz)
 
+    const findQuestionById = (req, res) => {
+        const quid = req.params.qid;
+        questionsService.findQuestionById(quid)
+            .then((questions) => {
+                res.send(questions)
+            })
+    }
+
+    app.get("/api/questions", findAllQuestions);
+    app.get("/api/quizzes/:qzid/questions", findQuestionsForQuiz);
+    app.get('/api/questions/:qid', findQuestionById);
 }

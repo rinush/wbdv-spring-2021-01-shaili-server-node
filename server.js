@@ -1,6 +1,13 @@
-
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose');
+
+ mongoose.connect("mongodb://localhost:27017/whiteboard", {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+ });
+
+
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -11,11 +18,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
 
-const quizzesController = require('./controllers/quizzes-controller')
-quizzesController(app)
-
-const questionsController = require('./controllers/question-controller')
-questionsController(app)
-
-app.listen(3000)
+require('./controllers/quiz-attempts-controller')(app)
+require('./controllers/quizzes-controller')(app)
+require('./controllers/questions-controller')(app)
+app.listen(3000);
