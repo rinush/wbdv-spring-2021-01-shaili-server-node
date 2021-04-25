@@ -2,7 +2,9 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 
- mongoose.connect("mongodb://localhost:27017/whiteboard", {
+const uri = "mongodb+srv://rinu:rinumongo6935@cluster0.seapw.mongodb.net/whiteboard?retryWrites=true&w=majority"
+
+ mongoose.connect(uri, {
    useNewUrlParser: true,
    useUnifiedTopology: true,
  });
