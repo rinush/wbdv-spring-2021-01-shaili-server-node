@@ -20,10 +20,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-const bodyParser = require('body-parser')
+var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 require('./controllers/quiz-attempts-controller')(app)
 require('./controllers/quizzes-controller')(app)
 require('./controllers/questions-controller')(app)
-//app.listen(3000);
+app.listen(3000);
